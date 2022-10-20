@@ -6,57 +6,51 @@
 //
 
 import SwiftUI
+import ios_neumorphism
 
 struct ContentView: View {
     @StateObject var viewModel = ViewModel()
     var dateFormatter = ISO8601DateFormatter.init()
+    @State var isDarkModeEnabled = false
     
     var body: some View {
-        VStack {
-            NavigationView {
-                VStack {
-                    Text("Latitude: \(viewModel.weatherReport.latitude)")
+        ZStack {
+            Color.backgroundColor
+            
+            VStack {
+                if (viewModel.dailyReport.isEmpty) {
+                    ProgressView()
+                } else {
+                    Spacer()
                     
-                    Text("Latitude: \(viewModel.weatherReport.longitude)")
+                    CurrentWeatherView(
+                        isDarkModeEnabled: $isDarkModeEnabled,
+                        dailyReport: viewModel.dailyReport[0]
+                    )
                     
-                    if (viewModel.dailyReport.isEmpty) {
-                        ProgressView()
-                    } else {
-                        List {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 25) {
                             ForEach(viewModel.dailyReport, id: \.self) { dailyReport in
-                                VStack {
-                                    HStack {
-                                        Text(dailyReport.time)
-                                        
-                                        Spacer()
-                                        
-                                        Text(dailyReport.humidity)
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                    HStack {
-                                        Text(dailyReport.temperature)
-                                        
-                                        Spacer()
-                                        
-                                        Text(dailyReport.windSpeed)
-                                        
-                                        Spacer()
-                                        
-                                        Text(dailyReport.weatherSymbolName)
-                                    }
-                                }
+                                
+                                HourlyWeatherReportView(isDarkModeEnabled: $isDarkModeEnabled, dailyReport: dailyReport)
                             }
                         }
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 50)
                     }
-                }
-                .navigationTitle("Weather Report")
-                .onAppear {
-                    viewModel.fetchWeatherReport()
+                    
+                    Spacer()
                 }
             }
+            .background(Color.backgroundColor)
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+            .onAppear {
+                viewModel.fetchWeatherReport()
+            }
         }
+        .preferredColorScheme(.light)
+        .background(Color.backgroundColor)
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
     }
 }
 

@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "ios-neumorphism",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tarikyasar/ios-neumorphism",
+      "state" : {
+        "branch" : "main",
+        "revision" : "464306b11fd66c37eea3a3a8d009f40a7163030f"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -23,8 +23,11 @@ class ViewModel: ObservableObject {
         )
     )
     @Published var dailyReport: [HourlyWeatherReport] = []
+    @Published var isLoading = true
     
     func fetchWeatherReport() {
+        isLoading = true
+        
         guard let url = URL(string: Constants().API_URL) else {
             return
         }
@@ -39,6 +42,7 @@ class ViewModel: ObservableObject {
                 
                 DispatchQueue.main.async {
                     self?.weatherReport = weatherReport
+                    self?.isLoading = false
                     
                     for number in 0..<24 {
                         let hourly = weatherReport.hourly
@@ -46,9 +50,9 @@ class ViewModel: ObservableObject {
                         self?.dailyReport.append(
                             HourlyWeatherReport(
                                 time: hourly.time[number].components(separatedBy: "T").last!,
-                                temperature: "\(hourly.temperature_2m[number]) \(weatherReport.hourly_units.temperature_2m)",
-                                humidity: "\(hourly.relativehumidity_2m[number]) \(weatherReport.hourly_units.relativehumidity_2m)",
-                                windSpeed: "\(hourly.windspeed_10m[number]) \(weatherReport.hourly_units.windspeed_10m)",
+                                temperature: "\(hourly.temperature_2m[number])\(weatherReport.hourly_units.temperature_2m)",
+                                humidity: "\(hourly.relativehumidity_2m[number])\(weatherReport.hourly_units.relativehumidity_2m)",
+                                windSpeed: "\(hourly.windspeed_10m[number])\(weatherReport.hourly_units.windspeed_10m)",
                                 weatherSymbolName: getWeatherSymbolName(number: hourly.weathercode[number])
                             )
                         )

@@ -17,6 +17,10 @@
 		717B95422901ADF8007C68A7 /* WeatherReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B95412901ADF8007C68A7 /* WeatherReport.swift */; };
 		717B95452901B5F1007C68A7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B95442901B5F1007C68A7 /* Constants.swift */; };
 		717B95472901BB27007C68A7 /* HourlyWeatherReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B95462901BB27007C68A7 /* HourlyWeatherReport.swift */; };
+		717B954A2901BD73007C68A7 /* ios-neumorphism in Frameworks */ = {isa = PBXBuildFile; productRef = 717B95492901BD73007C68A7 /* ios-neumorphism */; };
+		717B954C2901BE29007C68A7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B954B2901BE29007C68A7 /* Color.swift */; };
+		717B954F2901C124007C68A7 /* CurrentWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B954E2901C124007C68A7 /* CurrentWeatherView.swift */; };
+		717B95512901C12D007C68A7 /* HourlyWeatherReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B95502901C12D007C68A7 /* HourlyWeatherReportView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +35,9 @@
 		717B95412901ADF8007C68A7 /* WeatherReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherReport.swift; sourceTree = "<group>"; };
 		717B95442901B5F1007C68A7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		717B95462901BB27007C68A7 /* HourlyWeatherReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherReport.swift; sourceTree = "<group>"; };
+		717B954B2901BE29007C68A7 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		717B954E2901C124007C68A7 /* CurrentWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherView.swift; sourceTree = "<group>"; };
+		717B95502901C12D007C68A7 /* HourlyWeatherReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherReportView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				717B954A2901BD73007C68A7 /* ios-neumorphism in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +71,7 @@
 		717B952B2901A889007C68A7 /* ios-weather-app */ = {
 			isa = PBXGroup;
 			children = (
+				717B954D2901C113007C68A7 /* Views */,
 				717B95432901B5EA007C68A7 /* Utils */,
 				717B953C2901ADDE007C68A7 /* Model */,
 				717B952C2901A889007C68A7 /* ios_weather_appApp.swift */,
@@ -97,8 +106,18 @@
 			isa = PBXGroup;
 			children = (
 				717B95442901B5F1007C68A7 /* Constants.swift */,
+				717B954B2901BE29007C68A7 /* Color.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		717B954D2901C113007C68A7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				717B954E2901C124007C68A7 /* CurrentWeatherView.swift */,
+				717B95502901C12D007C68A7 /* HourlyWeatherReportView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -117,6 +136,9 @@
 			dependencies = (
 			);
 			name = "ios-weather-app";
+			packageProductDependencies = (
+				717B95492901BD73007C68A7 /* ios-neumorphism */,
+			);
 			productName = "ios-weather-app";
 			productReference = 717B95292901A889007C68A7 /* ios-weather-app.app */;
 			productType = "com.apple.product-type.application";
@@ -145,6 +167,9 @@
 				Base,
 			);
 			mainGroup = 717B95202901A889007C68A7;
+			packageReferences = (
+				717B95482901BD73007C68A7 /* XCRemoteSwiftPackageReference "ios-neumorphism" */,
+			);
 			productRefGroup = 717B952A2901A889007C68A7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -171,8 +196,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				717B954C2901BE29007C68A7 /* Color.swift in Sources */,
 				717B95422901ADF8007C68A7 /* WeatherReport.swift in Sources */,
 				717B95402901ADF1007C68A7 /* HourlyReport.swift in Sources */,
+				717B95512901C12D007C68A7 /* HourlyWeatherReportView.swift in Sources */,
+				717B954F2901C124007C68A7 /* CurrentWeatherView.swift in Sources */,
 				717B952F2901A889007C68A7 /* ContentView.swift in Sources */,
 				717B95472901BB27007C68A7 /* HourlyWeatherReport.swift in Sources */,
 				717B953B2901A95E007C68A7 /* ViewModel.swift in Sources */,
@@ -379,6 +407,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		717B95482901BD73007C68A7 /* XCRemoteSwiftPackageReference "ios-neumorphism" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tarikyasar/ios-neumorphism";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		717B95492901BD73007C68A7 /* ios-neumorphism */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 717B95482901BD73007C68A7 /* XCRemoteSwiftPackageReference "ios-neumorphism" */;
+			productName = "ios-neumorphism";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 717B95212901A889007C68A7 /* Project object */;
 }

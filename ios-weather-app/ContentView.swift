@@ -8,14 +8,55 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var viewModel = ViewModel()
+    var dateFormatter = ISO8601DateFormatter.init()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            NavigationView {
+                VStack {
+                    Text("Latitude: \(viewModel.weatherReport.latitude)")
+                    
+                    Text("Latitude: \(viewModel.weatherReport.longitude)")
+                    
+                    if (viewModel.dailyReport.isEmpty) {
+                        ProgressView()
+                    } else {
+                        List {
+                            ForEach(viewModel.dailyReport, id: \.self) { dailyReport in
+                                VStack {
+                                    HStack {
+                                        Text(dailyReport.time)
+                                        
+                                        Spacer()
+                                        
+                                        Text(dailyReport.humidity)
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    HStack {
+                                        Text(dailyReport.temperature)
+                                        
+                                        Spacer()
+                                        
+                                        Text(dailyReport.windSpeed)
+                                        
+                                        Spacer()
+                                        
+                                        Text(dailyReport.weatherSymbolName)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .navigationTitle("Weather Report")
+                .onAppear {
+                    viewModel.fetchWeatherReport()
+                }
+            }
         }
-        .padding()
     }
 }
 

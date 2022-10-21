@@ -25,10 +25,10 @@ class ViewModel: ObservableObject {
     @Published var dailyReport: [HourlyWeatherReport] = []
     @Published var isLoading = true
     
-    func fetchWeatherReport() {
+    func fetchWeatherReport(latitude: Double, longitude: Double) {
         isLoading = true
         
-        guard let url = URL(string: Constants().API_URL) else {
+        guard let url = URL(string: "https://api.open-meteo.com/v1/forecast?latitude=\(latitude)&longitude=\(longitude)&hourly=temperature_2m,relativehumidity_2m,windspeed_10m,weathercode") else {
             return
         }
         

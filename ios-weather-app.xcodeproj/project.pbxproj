@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7163A7A72902F01B00DE0FFA /* DeviceLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7163A7A62902F01B00DE0FFA /* DeviceLocationService.swift */; };
 		717B952D2901A889007C68A7 /* ios_weather_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B952C2901A889007C68A7 /* ios_weather_appApp.swift */; };
 		717B952F2901A889007C68A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B952E2901A889007C68A7 /* ContentView.swift */; };
 		717B95312901A88A007C68A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 717B95302901A88A007C68A7 /* Assets.xcassets */; };
@@ -15,7 +16,6 @@
 		717B953E2901ADE9007C68A7 /* HourlyUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B953D2901ADE9007C68A7 /* HourlyUnits.swift */; };
 		717B95402901ADF1007C68A7 /* HourlyReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B953F2901ADF1007C68A7 /* HourlyReport.swift */; };
 		717B95422901ADF8007C68A7 /* WeatherReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B95412901ADF8007C68A7 /* WeatherReport.swift */; };
-		717B95452901B5F1007C68A7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B95442901B5F1007C68A7 /* Constants.swift */; };
 		717B95472901BB27007C68A7 /* HourlyWeatherReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B95462901BB27007C68A7 /* HourlyWeatherReport.swift */; };
 		717B954A2901BD73007C68A7 /* ios-neumorphism in Frameworks */ = {isa = PBXBuildFile; productRef = 717B95492901BD73007C68A7 /* ios-neumorphism */; };
 		717B954C2901BE29007C68A7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B954B2901BE29007C68A7 /* Color.swift */; };
@@ -24,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7163A7A62902F01B00DE0FFA /* DeviceLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLocationService.swift; sourceTree = "<group>"; };
+		7163A7A82902F1A400DE0FFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		717B95292901A889007C68A7 /* ios-weather-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-weather-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		717B952C2901A889007C68A7 /* ios_weather_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_weather_appApp.swift; sourceTree = "<group>"; };
 		717B952E2901A889007C68A7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -33,7 +35,6 @@
 		717B953D2901ADE9007C68A7 /* HourlyUnits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyUnits.swift; sourceTree = "<group>"; };
 		717B953F2901ADF1007C68A7 /* HourlyReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyReport.swift; sourceTree = "<group>"; };
 		717B95412901ADF8007C68A7 /* WeatherReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherReport.swift; sourceTree = "<group>"; };
-		717B95442901B5F1007C68A7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		717B95462901BB27007C68A7 /* HourlyWeatherReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherReport.swift; sourceTree = "<group>"; };
 		717B954B2901BE29007C68A7 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		717B954E2901C124007C68A7 /* CurrentWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherView.swift; sourceTree = "<group>"; };
@@ -71,6 +72,7 @@
 		717B952B2901A889007C68A7 /* ios-weather-app */ = {
 			isa = PBXGroup;
 			children = (
+				7163A7A82902F1A400DE0FFA /* Info.plist */,
 				717B954D2901C113007C68A7 /* Views */,
 				717B95432901B5EA007C68A7 /* Utils */,
 				717B953C2901ADDE007C68A7 /* Model */,
@@ -105,8 +107,8 @@
 		717B95432901B5EA007C68A7 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				717B95442901B5F1007C68A7 /* Constants.swift */,
 				717B954B2901BE29007C68A7 /* Color.swift */,
+				7163A7A62902F01B00DE0FFA /* DeviceLocationService.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -204,7 +206,7 @@
 				717B952F2901A889007C68A7 /* ContentView.swift in Sources */,
 				717B95472901BB27007C68A7 /* HourlyWeatherReport.swift in Sources */,
 				717B953B2901A95E007C68A7 /* ViewModel.swift in Sources */,
-				717B95452901B5F1007C68A7 /* Constants.swift in Sources */,
+				7163A7A72902F01B00DE0FFA /* DeviceLocationService.swift in Sources */,
 				717B953E2901ADE9007C68A7 /* HourlyUnits.swift in Sources */,
 				717B952D2901A889007C68A7 /* ios_weather_appApp.swift in Sources */,
 			);
@@ -338,6 +340,8 @@
 				DEVELOPMENT_TEAM = 9B5UBU5CRL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ios-weather-app/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to function";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -367,6 +371,8 @@
 				DEVELOPMENT_TEAM = 9B5UBU5CRL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ios-weather-app/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to function";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
-import ios_neumorphism
+import Combine
 
 struct ContentView: View {
     @StateObject var viewModel = ViewModel()
-    var dateFormatter = ISO8601DateFormatter.init()
+    @StateObject var deviceLocationService = DeviceLocationService.shared
+    
+    @State var tokens: Set<AnyCancellable> = []
     @State var isDarkModeEnabled = false
+    
+    var dateFormatter = ISO8601DateFormatter.init()
     
     var body: some View {
         ZStack {
@@ -45,12 +49,34 @@ struct ContentView: View {
             .background(Color.backgroundColor)
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
             .onAppear {
-                viewModel.fetchWeatherReport()
+                observeCoordinateUpdates()
+                observeDeniedLocationAccess()
+                deviceLocationService.requestLocationUpdates()
             }
         }
         .preferredColorScheme(.light)
         .background(Color.backgroundColor)
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+    }
+    
+    func observeCoordinateUpdates() {
+        deviceLocationService.coordinatesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                print("Handle \(completion) for error and finished subscription.")
+            } receiveValue: { coordinates in
+                viewModel.fetchWeatherReport(latitude: coordinates.latitude, longitude: coordinates.longitude)
+            }
+            .store(in: &tokens)
+    }
+    
+    func observeDeniedLocationAccess() {
+        deviceLocationService.deniedLocationAccessPublisher
+            .receive(on: DispatchQueue.main)
+            .sink {
+                print("Handle access denied event, possibly with an alert.")
+            }
+            .store(in: &tokens)
     }
 }
 

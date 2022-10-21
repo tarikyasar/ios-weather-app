@@ -41,19 +41,26 @@ class ViewModel: ObservableObject {
                 let weatherReport = try JSONDecoder().decode(WeatherReport.self, from: data)
                 
                 DispatchQueue.main.async {
+                    self?.dailyReport = []
                     self?.weatherReport = weatherReport
                     self?.isLoading = false
                     
-                    for number in 0..<24 {
+                    let hour = Calendar.current.component(.hour, from: Date())
+                    
+                    for number in hour..<(24+hour) {
                         let hourly = weatherReport.hourly
+                        let hour = hourly.time[number].components(separatedBy: "T").last!
                         
                         self?.dailyReport.append(
                             HourlyWeatherReport(
-                                time: hourly.time[number].components(separatedBy: "T").last!,
+                                time: hour,
                                 temperature: "\(hourly.temperature_2m[number])\(weatherReport.hourly_units.temperature_2m)",
                                 humidity: "\(hourly.relativehumidity_2m[number])\(weatherReport.hourly_units.relativehumidity_2m)",
                                 windSpeed: "\(hourly.windspeed_10m[number])\(weatherReport.hourly_units.windspeed_10m)",
-                                weatherSymbolName: getWeatherSymbolName(number: hourly.weathercode[number])
+                                weatherSymbolName: getWeatherSymbolName(
+                                    number: hourly.weathercode[number],
+                                    hour: Int(hour.components(separatedBy: ":").first!) ?? 0
+                                )
                             )
                         )
                     }

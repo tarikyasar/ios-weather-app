@@ -12,6 +12,7 @@ class DeviceLocationService: NSObject, CLLocationManagerDelegate, ObservableObje
 
     var coordinatesPublisher = PassthroughSubject<CLLocationCoordinate2D, Error>()
     var deniedLocationAccessPublisher = PassthroughSubject<Void, Never>()
+    var cityNamePublisher = PassthroughSubject<String, Never>()
 
     private override init() {
         super.init()
@@ -52,8 +53,22 @@ class DeviceLocationService: NSObject, CLLocationManagerDelegate, ObservableObje
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(locations)
         guard let location = locations.last else { return }
+        
+        let geoCoder = CLGeocoder()
+        let cityLocation = CLLocation(
+            latitude: location.coordinate.latitude,
+            longitude:  location.coordinate.longitude
+        )
+        
+        geoCoder.reverseGeocodeLocation(cityLocation, completionHandler: { (placemarks, _) -> Void in
+            placemarks?.forEach { (placemark) in
+                if let city = placemark.locality {
+                    self.cityNamePublisher.send(city)
+                }
+            }
+        })
+        
         coordinatesPublisher.send(location.coordinate)
     }
     

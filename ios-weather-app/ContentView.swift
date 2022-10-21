@@ -14,6 +14,8 @@ struct ContentView: View {
     
     @State var tokens: Set<AnyCancellable> = []
     @State var isDarkModeEnabled = false
+    @State var cityName: String = "-"
+    @State var time: String = ""
     
     var dateFormatter = ISO8601DateFormatter.init()
     
@@ -25,6 +27,19 @@ struct ContentView: View {
                 if (viewModel.dailyReport.isEmpty) {
                     ProgressView()
                 } else {
+                    VStack {
+                        Text(cityName)
+                            .font(.system(size: 40))
+                            .fontWeight(.bold)
+                            .foregroundColor(.gray)
+                        
+                        Text(time)
+                            .font(.system(size: 30))
+                            .fontWeight(.medium)
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.top, 40)
+                    
                     Spacer()
                     
                     CurrentWeatherView(
@@ -49,14 +64,25 @@ struct ContentView: View {
             .background(Color.backgroundColor)
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
             .onAppear {
+                time = getTime()
+                
                 observeCoordinateUpdates()
                 observeDeniedLocationAccess()
+                observeCityName()
+                
                 deviceLocationService.requestLocationUpdates()
             }
         }
         .preferredColorScheme(.light)
         .background(Color.backgroundColor)
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+    }
+    
+    func getTime() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        
+        return formatter.string(from: Date())
     }
     
     func observeCoordinateUpdates() {
@@ -75,6 +101,17 @@ struct ContentView: View {
             .receive(on: DispatchQueue.main)
             .sink {
                 print("Handle access denied event, possibly with an alert.")
+            }
+            .store(in: &tokens)
+    }
+    
+    func observeCityName() {
+        deviceLocationService.cityNamePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                print("Handle \(completion) for error and finished subscription.")
+            } receiveValue: { cityName in
+                self.cityName = cityName
             }
             .store(in: &tokens)
     }

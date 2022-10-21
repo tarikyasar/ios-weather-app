@@ -31,12 +31,14 @@ struct HourlyReport: Hashable, Codable {
  }
  */
 
-func getWeatherSymbolName(number: Int) -> String {
+func getWeatherSymbolName(number: Int, hour: Int) -> String {
+    var dayLightRange = 6...18
+    
     switch (number) {
     case 0:
-        return "sun.max.fill"
+        return dayLightRange.contains(hour) ? "sun.max.fill" : "moon.stars.fill"
     case 1...3:
-        return "cloud.sun.fill"
+        return dayLightRange.contains(hour) ? "cloud.sun.fill" : "cloud.moon.fill"
     case 45...48:
         return "cloud.fog.fill"
     case 51...55:
@@ -54,7 +56,7 @@ func getWeatherSymbolName(number: Int) -> String {
     case 95...99:
         return "cloud.bolt.rain.fill"
     default:
-        return "sun.max.fill"
+        return dayLightRange.contains(hour) ? "sun.max.fill" : "moon.stars.fill"
     }
 }
 

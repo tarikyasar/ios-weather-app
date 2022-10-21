@@ -341,6 +341,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-weather-app/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Weather;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to function";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -372,6 +373,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-weather-app/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Weather;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to function";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

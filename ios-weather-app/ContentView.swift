@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import AVFoundation
 
 struct ContentView: View {
     @StateObject var viewModel = ViewModel()
@@ -16,6 +17,8 @@ struct ContentView: View {
     @State var isDarkModeEnabled = false
     @State var cityName: String = "-"
     @State var time: String = ""
+    @State var yOffSet: CGFloat = 0
+    @State var refreshViewBackgroundColor = Color.gray
     
     var dateFormatter = ISO8601DateFormatter.init()
     
@@ -42,10 +45,49 @@ struct ContentView: View {
                     
                     Spacer()
                     
-                    CurrentWeatherView(
-                        isDarkModeEnabled: $isDarkModeEnabled,
-                        dailyReport: viewModel.dailyReport[0]
-                    )
+                    ZStack {
+                        // Refresh View
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 40)
+                                .fill(refreshViewBackgroundColor)
+                                .frame(width: 250, height: 250)
+                            
+                            VStack {
+                                Image(systemName: "arrow.counterclockwise")
+                                    .font(.system(size: 24))
+                                    .foregroundColor(yOffSet >= 45 ? Color.black : Color.white)
+                                    .rotationEffect(.degrees(-yOffSet*8), anchor: .center)
+                                    .padding(.top, 5)
+                                
+                                Spacer()
+                            }
+                            .frame(width: 250, height: 250)
+                        }
+                        
+                        CurrentWeatherView(
+                            isDarkModeEnabled: $isDarkModeEnabled,
+                            dailyReport: viewModel.dailyReport[0]
+                        )
+                        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                            .onChanged { value in
+                                let verticalAmount = value.translation.height
+                                if (verticalAmount >= 0 && verticalAmount <= 45) {
+                                    yOffSet = verticalAmount
+                                }
+                                
+                                refreshViewBackgroundColor = verticalAmount >= 45 ? Color.green : Color.gray
+                            }
+                            .onEnded { value in
+                                yOffSet = 0
+                                    
+                                if (value.translation.height >= 45) {
+                                    refresh()
+                                }
+                            }
+                        )
+                        .offset(y: yOffSet)
+                    }
+                    
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 25) {
@@ -76,6 +118,15 @@ struct ContentView: View {
         .preferredColorScheme(.light)
         .background(Color.backgroundColor)
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+    }
+    
+    func refresh() {
+        AudioServicesPlaySystemSound(1123)
+        
+        time = getTime()
+        observeCoordinateUpdates()
+        observeDeniedLocationAccess()
+        observeCityName()
     }
     
     func getTime() -> String {

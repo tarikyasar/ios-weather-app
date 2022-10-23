@@ -6,4 +6,5 @@ This is an application which I created by being inspired by [Philipp Lackner's W
 
 <div>
     <img src="/screenshots/ss.png" width="300">
+    <img src="/screenshots/refreshed.png" width="300">
 </div>

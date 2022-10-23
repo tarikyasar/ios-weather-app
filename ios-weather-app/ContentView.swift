@@ -55,7 +55,7 @@ struct ContentView: View {
                             VStack {
                                 Image(systemName: "arrow.counterclockwise")
                                     .font(.system(size: 24))
-                                    .foregroundColor(yOffSet >= 45 ? Color.black : Color.white)
+                                    .foregroundColor(.white)
                                     .rotationEffect(.degrees(-yOffSet*8), anchor: .center)
                                     .padding(.top, 5)
                                 
@@ -70,11 +70,9 @@ struct ContentView: View {
                         )
                         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
                             .onChanged { value in
-                                let verticalAmount = value.translation.height
-                                if (verticalAmount >= 0 && verticalAmount <= 45) {
-                                    yOffSet = verticalAmount
-                                }
+                                let verticalAmount = value.translation.height >= 0 ? value.translation.height/2 : 0
                                 
+                                yOffSet = verticalAmount <= 45 ? verticalAmount : 45
                                 refreshViewBackgroundColor = verticalAmount >= 45 ? Color.green : Color.gray
                             }
                             .onEnded { value in
@@ -87,12 +85,11 @@ struct ContentView: View {
                         )
                         .offset(y: yOffSet)
                     }
-                    
+                    .padding(.bottom, 40)
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 25) {
                             ForEach(viewModel.dailyReport, id: \.self) { dailyReport in
-                                
                                 HourlyWeatherReportView(isDarkModeEnabled: $isDarkModeEnabled, dailyReport: dailyReport)
                             }
                         }
@@ -107,11 +104,9 @@ struct ContentView: View {
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
             .onAppear {
                 time = getTime()
-                
                 observeCoordinateUpdates()
                 observeDeniedLocationAccess()
                 observeCityName()
-                
                 deviceLocationService.requestLocationUpdates()
             }
         }

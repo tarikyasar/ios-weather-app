@@ -59,7 +59,8 @@ struct HourlyWeatherReportView_Preview_Container: View {
                 temperature: "12C",
                 humidity: "%43",
                 windSpeed: "12 km/h",
-                weatherSymbolName: "cloud.rain.fill"
+                weatherSymbolName: "cloud.rain.fill",
+                weatherInfo: "Rainy"
             )
         )
     }

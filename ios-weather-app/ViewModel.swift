@@ -50,6 +50,10 @@ class ViewModel: ObservableObject {
                     for number in hour..<(24+hour) {
                         let hourly = weatherReport.hourly
                         let hour = hourly.time[number].components(separatedBy: "T").last!
+                        let weatherInfo = getWeatherSymbolName(
+                            number: hourly.weathercode[number],
+                            hour: Int(hour.components(separatedBy: ":").first!) ?? 0
+                        )
                         
                         self?.dailyReport.append(
                             HourlyWeatherReport(
@@ -57,10 +61,8 @@ class ViewModel: ObservableObject {
                                 temperature: "\(hourly.temperature_2m[number])\(weatherReport.hourly_units.temperature_2m)",
                                 humidity: "\(hourly.relativehumidity_2m[number])\(weatherReport.hourly_units.relativehumidity_2m)",
                                 windSpeed: "\(hourly.windspeed_10m[number])\(weatherReport.hourly_units.windspeed_10m)",
-                                weatherSymbolName: getWeatherSymbolName(
-                                    number: hourly.weathercode[number],
-                                    hour: Int(hour.components(separatedBy: ":").first!) ?? 0
-                                )
+                                weatherSymbolName: weatherInfo.0,
+                                weatherInfo: weatherInfo.1
                             )
                         )
                     }

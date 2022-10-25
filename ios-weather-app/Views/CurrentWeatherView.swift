@@ -19,7 +19,9 @@ struct CurrentWeatherView: View {
             NeumorphicSurface(
                 surfaceShape: RoundedRectangle(
                 cornerRadius: 40),
-                isDarkModeEnabled: isDarkModeEnabled
+                isDarkModeEnabled: isDarkModeEnabled,
+                width: 270,
+                height: 270
             )
             
             VStack {
@@ -44,6 +46,13 @@ struct CurrentWeatherView: View {
                         .font(.system(size: 50))
                         .foregroundColor(.gray)
                 }
+                
+                Spacer()
+                
+                Text(dailyReport.weatherInfo)
+                    .foregroundColor(.gray)
+                    .font(.system(size: 30))
+                    .fontWeight(.medium)
                 
                 Spacer()
                 
@@ -88,10 +97,11 @@ struct CurrentWeatherView_Preview_Container: View {
             isDarkModeEnabled: $isDarkModeEnabled,
             dailyReport: HourlyWeatherReport(
                 time: "00:00",
-                temperature: "12C",
+                temperature: "12°C",
                 humidity: "%43",
                 windSpeed: "12 km/h",
-                weatherSymbolName: "cloud.rain.fill"
+                weatherSymbolName: "cloud.rain.fill",
+                weatherInfo: "Rainy"
             )
         )
     }

@@ -14,4 +14,5 @@ struct HourlyWeatherReport: Hashable {
     let humidity: String
     let windSpeed: String
     let weatherSymbolName: String
+    let weatherInfo: String
 }

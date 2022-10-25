@@ -50,7 +50,7 @@ struct ContentView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 40)
                                 .fill(refreshViewBackgroundColor)
-                                .frame(width: 250, height: 250)
+                                .frame(width: 270, height: 270)
                             
                             VStack {
                                 Image(systemName: "arrow.counterclockwise")
@@ -61,7 +61,7 @@ struct ContentView: View {
                                 
                                 Spacer()
                             }
-                            .frame(width: 250, height: 250)
+                            .frame(width: 270, height: 270)
                         }
                         
                         CurrentWeatherView(

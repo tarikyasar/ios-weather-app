@@ -74,12 +74,12 @@
 		717B952B2901A889007C68A7 /* ios-weather-app */ = {
 			isa = PBXGroup;
 			children = (
+				717B952E2901A889007C68A7 /* ContentView.swift */,
 				7163A7A82902F1A400DE0FFA /* Info.plist */,
 				717B954D2901C113007C68A7 /* Views */,
 				717B95432901B5EA007C68A7 /* Utils */,
 				717B953C2901ADDE007C68A7 /* Model */,
 				717B952C2901A889007C68A7 /* ios_weather_appApp.swift */,
-				717B952E2901A889007C68A7 /* ContentView.swift */,
 				717B953A2901A95E007C68A7 /* ViewModel.swift */,
 				717B95302901A88A007C68A7 /* Assets.xcassets */,
 				717B95322901A88A007C68A7 /* Preview Content */,

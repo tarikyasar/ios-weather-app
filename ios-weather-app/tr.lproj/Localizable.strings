@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  ios-weather-app
+
+  Created by Tarik Yasar on 26.10.2022.
+  
+*/
+
+"Clear" = "Açık";
+"Partly Cloudy" = "Parçalı Bulutlu";
+"Foggy" = "Sisli";
+"Drizzle" = "Çiseleyen Yağmur";
+"Rainy" = "Yağmurlu";
+"Snowfall" = "Kar Yağışı";
+"Snow Grains" = "Hafif Kar Yağışlı";
+"Showering Rain" = "Yağmurlu";
+"Showering Snow" = "Kar Yağışlı";
+"Thunderstorm" = "Fırtınalı";

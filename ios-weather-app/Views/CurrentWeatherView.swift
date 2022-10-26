@@ -49,7 +49,7 @@ struct CurrentWeatherView: View {
                 
                 Spacer()
                 
-                Text(dailyReport.weatherInfo)
+                Text(NSLocalizedString(dailyReport.weatherInfo, comment: ""))
                     .foregroundColor(.gray)
                     .font(.system(size: 30))
                     .fontWeight(.medium)

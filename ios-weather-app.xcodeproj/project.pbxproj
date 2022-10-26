@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7122D9BF29095D520095B287 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7122D9C129095D520095B287 /* Localizable.strings */; };
 		7163A7A72902F01B00DE0FFA /* DeviceLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7163A7A62902F01B00DE0FFA /* DeviceLocationService.swift */; };
 		717B952D2901A889007C68A7 /* ios_weather_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B952C2901A889007C68A7 /* ios_weather_appApp.swift */; };
 		717B952F2901A889007C68A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B952E2901A889007C68A7 /* ContentView.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7122D9C029095D520095B287 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7163A7A62902F01B00DE0FFA /* DeviceLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLocationService.swift; sourceTree = "<group>"; };
 		7163A7A82902F1A400DE0FFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		717B95292901A889007C68A7 /* ios-weather-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-weather-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +83,7 @@
 				717B953A2901A95E007C68A7 /* ViewModel.swift */,
 				717B95302901A88A007C68A7 /* Assets.xcassets */,
 				717B95322901A88A007C68A7 /* Preview Content */,
+				7122D9C129095D520095B287 /* Localizable.strings */,
 			);
 			path = "ios-weather-app";
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				tr,
 				Base,
 			);
 			mainGroup = 717B95202901A889007C68A7;
@@ -187,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				717B95342901A88A007C68A7 /* Preview Assets.xcassets in Resources */,
+				7122D9BF29095D520095B287 /* Localizable.strings in Resources */,
 				717B95312901A88A007C68A7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,6 +218,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7122D9C129095D520095B287 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7122D9C029095D520095B287 /* tr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		717B95352901A88A007C68A7 /* Debug */ = {
@@ -341,12 +357,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-weather-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Weather;
+				INFOPLIST_KEY_CFBundleDisplayName = Hava;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to function";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -378,12 +395,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-weather-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Weather;
+				INFOPLIST_KEY_CFBundleDisplayName = Hava;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to function";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				LD_RUNPATH_SEARCH_PATHS = (

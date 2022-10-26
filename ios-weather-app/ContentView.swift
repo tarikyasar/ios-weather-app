@@ -88,7 +88,7 @@ struct ContentView: View {
                     .padding(.bottom, 40)
                     
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 25) {
+                        HStack(spacing: 10) {
                             ForEach(viewModel.dailyReport, id: \.self) { dailyReport in
                                 HourlyWeatherReportView(isDarkModeEnabled: $isDarkModeEnabled, dailyReport: dailyReport)
                             }
@@ -110,7 +110,6 @@ struct ContentView: View {
                 deviceLocationService.requestLocationUpdates()
             }
         }
-        .preferredColorScheme(.light)
         .background(Color.backgroundColor)
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
     }

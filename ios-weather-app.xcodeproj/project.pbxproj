@@ -43,6 +43,7 @@
 		717B954B2901BE29007C68A7 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		717B954E2901C124007C68A7 /* CurrentWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherView.swift; sourceTree = "<group>"; };
 		717B95502901C12D007C68A7 /* HourlyWeatherReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherReportView.swift; sourceTree = "<group>"; };
+		71946B76290986AC00EF0BE3 /* PrivacyPolicy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PrivacyPolicy.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +82,7 @@
 				717B95432901B5EA007C68A7 /* Utils */,
 				717B953C2901ADDE007C68A7 /* Model */,
 				717B952C2901A889007C68A7 /* ios_weather_appApp.swift */,
+				71946B76290986AC00EF0BE3 /* PrivacyPolicy.md */,
 				717B953A2901A95E007C68A7 /* ViewModel.swift */,
 				717B95302901A88A007C68A7 /* Assets.xcassets */,
 				717B95322901A88A007C68A7 /* Preview Content */,

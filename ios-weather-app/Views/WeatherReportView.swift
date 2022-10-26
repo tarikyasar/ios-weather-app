@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct WeatherReportView: View {
-    @State var refreshViewBackgroundColor = Color.gray
-    @State var yOffSet: CGFloat = 0
+    @State var refreshViewBackgroundColor = Color.green
+    @State var yOffSet: CGFloat = 45
     
     @Binding var isDarkModeEnabled: Bool
     var isLocationAccessProvided: Bool

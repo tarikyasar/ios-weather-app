@@ -17,8 +17,6 @@ struct ContentView: View {
     @State var isDarkModeEnabled = false
     @State var cityName: String = "-"
     @State var time: String = ""
-    @State var yOffSet: CGFloat = 0
-    @State var refreshViewBackgroundColor = Color.gray
     
     var dateFormatter = ISO8601DateFormatter.init()
     
@@ -27,77 +25,17 @@ struct ContentView: View {
             Color.backgroundColor
             
             VStack {
-                if (viewModel.dailyReport.isEmpty) {
+                if (viewModel.dailyReport.isEmpty && deviceLocationService.isLocationAccessGranted == true) {
                     ProgressView()
                 } else {
-                    VStack {
-                        Text(cityName)
-                            .font(.system(size: 40))
-                            .fontWeight(.bold)
-                            .foregroundColor(.gray)
-                        
-                        Text(time)
-                            .font(.system(size: 30))
-                            .fontWeight(.medium)
-                            .foregroundColor(.gray)
-                    }
-                    .padding(.top, 40)
-                    
-                    Spacer()
-                    
-                    ZStack {
-                        // Refresh View
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 40)
-                                .fill(refreshViewBackgroundColor)
-                                .frame(width: 270, height: 270)
-                            
-                            VStack {
-                                Image(systemName: "arrow.counterclockwise")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(.white)
-                                    .rotationEffect(.degrees(-yOffSet*8), anchor: .center)
-                                    .padding(.top, 5)
-                                
-                                Spacer()
-                            }
-                            .frame(width: 270, height: 270)
-                        }
-                        
-                        CurrentWeatherView(
-                            isDarkModeEnabled: $isDarkModeEnabled,
-                            dailyReport: viewModel.dailyReport[0]
-                        )
-                        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
-                            .onChanged { value in
-                                let verticalAmount = value.translation.height >= 0 ? value.translation.height/2 : 0
-                                
-                                yOffSet = verticalAmount <= 45 ? verticalAmount : 45
-                                refreshViewBackgroundColor = verticalAmount >= 45 ? Color.green : Color.gray
-                            }
-                            .onEnded { value in
-                                yOffSet = 0
-                                    
-                                if (value.translation.height >= 45) {
-                                    refresh()
-                                }
-                            }
-                        )
-                        .offset(y: yOffSet)
-                    }
-                    .padding(.bottom, 40)
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 10) {
-                            ForEach(viewModel.dailyReport, id: \.self) { dailyReport in
-                                HourlyWeatherReportView(isDarkModeEnabled: $isDarkModeEnabled, dailyReport: dailyReport)
-                            }
-                        }
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 50)
-                    }
-                    
-                    Spacer()
+                    WeatherReportContent(
+                        isDarkModeEnabled: $isDarkModeEnabled,
+                        isLocationAccessProvided: deviceLocationService.isLocationAccessGranted,
+                        cityName: cityName,
+                        time: time,
+                        onRefresh: refresh,
+                        dailyReports: viewModel.dailyReport
+                    )
                 }
             }
             .background(Color.backgroundColor)
@@ -144,9 +82,7 @@ struct ContentView: View {
     func observeDeniedLocationAccess() {
         deviceLocationService.deniedLocationAccessPublisher
             .receive(on: DispatchQueue.main)
-            .sink {
-                print("Handle access denied event, possibly with an alert.")
-            }
+            .sink {}
             .store(in: &tokens)
     }
     
@@ -159,6 +95,107 @@ struct ContentView: View {
                 self.cityName = cityName
             }
             .store(in: &tokens)
+    }
+}
+
+struct WeatherReportContent: View {
+    @State var refreshViewBackgroundColor = Color.gray
+    @State var yOffSet: CGFloat = 0
+    
+    @Binding var isDarkModeEnabled: Bool
+    var isLocationAccessProvided: Bool
+    
+    var cityName: String
+    var time: String
+    var onRefresh: () -> Void
+    var dailyReports: [HourlyWeatherReport]
+    
+    var body: some View {
+        if (isLocationAccessProvided) {
+            VStack {
+                Text(cityName)
+                    .font(.system(size: 40))
+                    .fontWeight(.bold)
+                    .foregroundColor(.gray)
+                
+                Text(time)
+                    .font(.system(size: 30))
+                    .fontWeight(.medium)
+                    .foregroundColor(.gray)
+            }
+            .padding(.top, 40)
+            
+            Spacer()
+            
+            ZStack {
+                // Refresh View
+                ZStack {
+                    RoundedRectangle(cornerRadius: 40)
+                        .fill(refreshViewBackgroundColor)
+                        .frame(width: 270, height: 270)
+                    
+                    VStack {
+                        Image(systemName: "arrow.counterclockwise")
+                            .font(.system(size: 24))
+                            .foregroundColor(.white)
+                            .rotationEffect(.degrees(-yOffSet*8), anchor: .center)
+                            .padding(.top, 5)
+                        
+                        Spacer()
+                    }
+                    .frame(width: 270, height: 270)
+                }
+                
+                CurrentWeatherView(
+                    isDarkModeEnabled: $isDarkModeEnabled,
+                    dailyReport: dailyReports[0]
+                )
+                .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                    .onChanged { value in
+                        let verticalAmount = value.translation.height >= 0 ? value.translation.height/2 : 0
+                        
+                        yOffSet = verticalAmount <= 45 ? verticalAmount : 45
+                        refreshViewBackgroundColor = verticalAmount >= 45 ? Color.green : Color.gray
+                    }
+                    .onEnded { value in
+                        yOffSet = 0
+                            
+                        if (value.translation.height >= 45) {
+                            onRefresh()
+                        }
+                    }
+                )
+                .offset(y: yOffSet)
+            }
+            .padding(.bottom, 40)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 25) {
+                    ForEach(dailyReports, id: \.self) { dailyReport in
+                        HourlyWeatherReportView(
+                            isDarkModeEnabled: $isDarkModeEnabled,
+                            dailyReport: dailyReport
+                        )
+                    }
+                }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 50)
+            }
+            
+            Spacer()
+        } else {
+            VStack {
+                Image(systemName: "location.circle")
+                    .foregroundColor(.gray)
+                    .font(.system(size: 60))
+                
+                Text("Allow location access to view weather information.")
+                    .padding()
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.gray)
+                    .font(.system(size: 20))
+            }
+        }
     }
 }
 

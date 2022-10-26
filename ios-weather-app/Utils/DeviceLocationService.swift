@@ -9,11 +9,12 @@ import Combine
 import CoreLocation
 
 class DeviceLocationService: NSObject, CLLocationManagerDelegate, ObservableObject {
+    
+    @Published var isLocationAccessGranted = false
 
     var coordinatesPublisher = PassthroughSubject<CLLocationCoordinate2D, Error>()
     var deniedLocationAccessPublisher = PassthroughSubject<Void, Never>()
     var cityNamePublisher = PassthroughSubject<String, Never>()
-    
 
     private override init() {
         super.init()
@@ -32,9 +33,11 @@ class DeviceLocationService: NSObject, CLLocationManagerDelegate, ObservableObje
             
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
+            isLocationAccessGranted = false
             
         case .authorizedWhenInUse, .authorizedAlways:
             locationManager.startUpdatingLocation()
+            isLocationAccessGranted = true
             
         default:
             deniedLocationAccessPublisher.send()
@@ -46,10 +49,12 @@ class DeviceLocationService: NSObject, CLLocationManagerDelegate, ObservableObje
             
         case .authorizedWhenInUse, .authorizedAlways:
             manager.startUpdatingLocation()
+            isLocationAccessGranted = true
             
         default:
             manager.stopUpdatingLocation()
             deniedLocationAccessPublisher.send()
+            isLocationAccessGranted = false
         }
     }
 

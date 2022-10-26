@@ -18,7 +18,7 @@ struct HourlyReport: Hashable, Codable {
 
 
 func getWeatherSymbolName(number: Int, hour: Int) -> (String, String) {
-    var dayLightRange = 6...18
+    let dayLightRange = 6...18
     
     switch (number) {
     case 0:

@@ -11,14 +11,14 @@ import ios_neumorphism
 struct CurrentWeatherView: View {
     @Binding var isDarkModeEnabled: Bool
     var dailyReport: HourlyWeatherReport
+    var targetTemperatureUnit: TemperatureUnit
     var width: CGFloat = 100
     var height: CGFloat = 100
     
     var body: some View {
         ZStack {
             NeumorphicSurface(
-                surfaceShape: RoundedRectangle(
-                cornerRadius: 40),
+                surfaceShape: RoundedRectangle(cornerRadius: 40),
                 isDarkModeEnabled: isDarkModeEnabled,
                 width: 270,
                 height: 270
@@ -27,7 +27,7 @@ struct CurrentWeatherView: View {
             VStack {
                 Spacer()
                 
-                Text("\(dailyReport.temperature)")
+                Text(getTemperatureWithUnit(temperature: dailyReport.temperature, unit: targetTemperatureUnit))
                     .foregroundColor(.gray)
                     .fontWeight(.medium)
                     .font(.system(size: 42))
@@ -97,12 +97,13 @@ struct CurrentWeatherView_Preview_Container: View {
             isDarkModeEnabled: $isDarkModeEnabled,
             dailyReport: HourlyWeatherReport(
                 time: "00:00",
-                temperature: "12°C",
+                temperature: 12.0,
                 humidity: "%43",
                 windSpeed: "12 km/h",
                 weatherSymbolName: "cloud.rain.fill",
                 weatherInfo: "Rainy"
-            )
+            ),
+            targetTemperatureUnit: TemperatureUnit.fahrenheit
         )
     }
 }

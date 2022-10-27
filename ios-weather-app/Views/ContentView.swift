@@ -8,8 +8,11 @@
 import SwiftUI
 import Combine
 import AVFoundation
+import ios_neumorphism
 
 struct ContentView: View {
+    @AppStorage("tempUnit") var temperatureUnit: TemperatureUnit = TemperatureUnit.celsius
+    
     @StateObject var viewModel = ViewModel()
     @StateObject var deviceLocationService = DeviceLocationService.shared
     
@@ -17,39 +20,68 @@ struct ContentView: View {
     @State var isDarkModeEnabled = false
     @State var cityName: String = "-"
     @State var time: String = ""
+    @State var showSettingsSheet: Bool = false
+    @State var temperatureUnitState: TemperatureUnit = TemperatureUnit.celsius
     
     var dateFormatter = ISO8601DateFormatter.init()
     
     var body: some View {
-        ZStack {
-            Color.backgroundColor
-            
-            VStack {
-                if (viewModel.dailyReport.isEmpty && deviceLocationService.isLocationAccessGranted == true) {
-                    ProgressView()
-                } else {
+        VStack {
+            if (viewModel.dailyReport.isEmpty && deviceLocationService.isLocationAccessGranted == true) {
+                ProgressView()
+            } else {
+                VStack {
+                    HStack {
+                        Spacer()
+                        
+                        SettingsButton(showSettingsSheet: $showSettingsSheet)
+                            .padding(.trailing, 10)
+                            .sheet(
+                                isPresented: $showSettingsSheet,
+                                onDismiss: {
+                                    temperatureUnit = temperatureUnitState
+                                }
+                            ) {
+                                ZStack {
+                                    Color.backgroundColor
+                                    
+                                    SettingsSheetView(
+                                        temperatureUnitState: $temperatureUnitState,
+                                        onDismissRequest: {
+                                            showSettingsSheet.toggle()
+                                        }
+                                    )
+                                    
+                                }
+                                .background(Color.backgroundColor)
+                                .presentationDetents([.medium])
+                            }
+                    }
+                    
                     WeatherReportView(
                         isDarkModeEnabled: $isDarkModeEnabled,
                         isLocationAccessProvided: deviceLocationService.isLocationAccessGranted,
                         cityName: cityName,
                         time: time,
                         onRefresh: refresh,
-                        dailyReports: viewModel.dailyReport
+                        dailyReports: viewModel.dailyReport,
+                        temperatureUnit: temperatureUnit
                     )
                 }
-            }
-            .background(Color.backgroundColor)
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-            .onAppear {
-                time = getTime()
-                observeCoordinateUpdates()
-                observeDeniedLocationAccess()
-                observeCityName()
-                deviceLocationService.requestLocationUpdates()
+                
             }
         }
         .background(Color.backgroundColor)
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+        .onAppear {
+            temperatureUnitState = temperatureUnit
+            
+            time = getTime()
+            observeCoordinateUpdates()
+            observeDeniedLocationAccess()
+            observeCityName()
+            deviceLocationService.requestLocationUpdates()
+        }
     }
     
     func refresh() {

@@ -58,7 +58,7 @@ class ViewModel: ObservableObject {
                         self?.dailyReport.append(
                             HourlyWeatherReport(
                                 time: hour,
-                                temperature: "\(hourly.temperature_2m[number])\(weatherReport.hourly_units.temperature_2m)",
+                                temperature: hourly.temperature_2m[number],
                                 humidity: "\(hourly.relativehumidity_2m[number])\(weatherReport.hourly_units.relativehumidity_2m)",
                                 windSpeed: "\(hourly.windspeed_10m[number])\(weatherReport.hourly_units.windspeed_10m)",
                                 weatherSymbolName: weatherInfo.0,

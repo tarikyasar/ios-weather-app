@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct WeatherReportView: View {
-    @State var refreshViewBackgroundColor = Color.green
-    @State var yOffSet: CGFloat = 45
+    @State var refreshViewBackgroundColor = Color.gray
+    @State var yOffSet: CGFloat = 0
     
     @Binding var isDarkModeEnabled: Bool
     var isLocationAccessProvided: Bool
@@ -18,6 +18,7 @@ struct WeatherReportView: View {
     var time: String
     var onRefresh: () -> Void
     var dailyReports: [HourlyWeatherReport]
+    var temperatureUnit: TemperatureUnit
     
     var body: some View {
         if (isLocationAccessProvided) {
@@ -57,7 +58,8 @@ struct WeatherReportView: View {
                 
                 CurrentWeatherView(
                     isDarkModeEnabled: $isDarkModeEnabled,
-                    dailyReport: dailyReports[0]
+                    dailyReport: dailyReports[0],
+                    targetTemperatureUnit: temperatureUnit
                 )
                 .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
                     .onChanged { value in
@@ -83,7 +85,8 @@ struct WeatherReportView: View {
                     ForEach(dailyReports, id: \.self) { dailyReport in
                         HourlyWeatherReportView(
                             isDarkModeEnabled: $isDarkModeEnabled,
-                            dailyReport: dailyReport
+                            dailyReport: dailyReport,
+                            targetTemperatureUnit: temperatureUnit
                         )
                     }
                 }

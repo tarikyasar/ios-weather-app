@@ -16,3 +16,4 @@
 "Showering Rain" = "Yağmurlu";
 "Showering Snow" = "Kar Yağışlı";
 "Thunderstorm" = "Fırtınalı";
+"Allow location access to view weather information." = "Hava durumunu görüntülemek için konum servislerine erişim izni vermeniz gerekmektedir.";

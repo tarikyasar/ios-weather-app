@@ -13,6 +13,7 @@ struct HourlyWeatherReportView: View {
     var dailyReport: HourlyWeatherReport
     var width: CGFloat = 120
     var height: CGFloat = 120
+    var targetTemperatureUnit: TemperatureUnit
     
     var body: some View {
         ZStack {
@@ -36,7 +37,7 @@ struct HourlyWeatherReportView: View {
                 
                 Spacer()
                 
-                Text(dailyReport.temperature)
+                Text(getTemperatureWithUnit(temperature: dailyReport.temperature, unit: targetTemperatureUnit))
                     .foregroundColor(.gray)
                     .font(.system(size: 20))
                     .fontWeight(.medium)
@@ -56,12 +57,13 @@ struct HourlyWeatherReportView_Preview_Container: View {
             isDarkModeEnabled: $isDarkModeEnabled,
             dailyReport: HourlyWeatherReport(
                 time: "00:00",
-                temperature: "12C",
+                temperature: 12.0,
                 humidity: "%43",
                 windSpeed: "12 km/h",
                 weatherSymbolName: "cloud.rain.fill",
                 weatherInfo: "Rainy"
-            )
+            ),
+            targetTemperatureUnit: TemperatureUnit.fahrenheit
         )
     }
 }

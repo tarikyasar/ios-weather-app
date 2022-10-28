@@ -33,10 +33,12 @@ struct SettingsSheetView: View {
             }
             .padding(.bottom, 20)
             
+            Divider()
+            
             HStack {
-                Text("Unit")
-                    .font(.system(size: 30))
-                    .foregroundColor(.gray)
+                Text("Temperature Unit")
+                    .font(.system(size: 26))
+                    .foregroundColor(.darkGray)
                     .fontWeight(.medium)
                 
                 Spacer()

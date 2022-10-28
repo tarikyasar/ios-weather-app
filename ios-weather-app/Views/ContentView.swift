@@ -29,6 +29,7 @@ struct ContentView: View {
         VStack {
             if (viewModel.dailyReport.isEmpty && deviceLocationService.isLocationAccessGranted == true) {
                 ProgressView()
+                    .background(Color.backgroundColor)
             } else {
                 VStack {
                     HStack {
@@ -71,8 +72,8 @@ struct ContentView: View {
                 
             }
         }
-        .background(Color.backgroundColor)
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+        .background(Color.backgroundColor)
         .onAppear {
             temperatureUnitState = temperatureUnit
             

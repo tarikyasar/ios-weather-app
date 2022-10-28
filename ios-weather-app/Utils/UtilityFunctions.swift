@@ -13,6 +13,6 @@ func getTemperatureWithUnit(temperature: Double, unit: TemperatureUnit) -> Strin
     case .celsius:
         return "\(temperature)°C"
     case .fahrenheit:
-        return "\(temperature*1.8 + 32)°F"
+        return "\(String(format: "%.1f", temperature*1.8 + 32))°F"
     }
 }

@@ -14,6 +14,13 @@ struct HourlyReport: Hashable, Codable {
     let relativehumidity_2m: [Double]
     let windspeed_10m: [Double]
     let weathercode: [Int]
+    
+    static var sampleHourlyReport = HourlyReport(
+        time: ["00.00"],
+        temperature_2m: [10.0],
+        relativehumidity_2m: [40.0],
+        windspeed_10m: [12.0], weathercode: [0]
+    )
 }
 
 

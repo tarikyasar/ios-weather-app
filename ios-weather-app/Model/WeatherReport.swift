@@ -14,4 +14,12 @@ struct WeatherReport: Hashable, Codable {
     let elevation: Double
     let hourly_units: HourlyUnits
     let hourly: HourlyReport
+    
+    static var sampleWeatherReport = WeatherReport(
+        latitude: 39.0,
+        longitude: 39.0,
+        elevation: 1000.0,
+        hourly_units: HourlyUnits.sampleHourlyUnits,
+        hourly: HourlyReport.sampleHourlyReport
+    )
 }

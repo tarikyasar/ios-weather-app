@@ -37,7 +37,7 @@ struct HourlyWeatherReportView: View {
                 
                 Spacer()
                 
-                Text(getTemperatureWithUnit(temperature: dailyReport.temperature, unit: targetTemperatureUnit))
+                Text(Bundle.main.getTemperatureWithUnit(temperature: dailyReport.temperature, unit: targetTemperatureUnit))
                     .foregroundColor(.gray)
                     .font(.system(size: 20))
                     .fontWeight(.medium)

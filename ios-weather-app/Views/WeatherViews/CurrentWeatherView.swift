@@ -27,7 +27,7 @@ struct CurrentWeatherView: View {
             VStack {
                 Spacer()
                 
-                Text(getTemperatureWithUnit(temperature: dailyReport.temperature, unit: targetTemperatureUnit))
+                Text(Bundle.main.getTemperatureWithUnit(temperature: dailyReport.temperature, unit: targetTemperatureUnit))
                     .foregroundColor(.gray)
                     .fontWeight(.medium)
                     .font(.system(size: 42))

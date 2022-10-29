@@ -15,4 +15,13 @@ struct HourlyWeatherReport: Hashable {
     let windSpeed: String
     let weatherSymbolName: String
     let weatherInfo: String
+    
+    static var sampleHourlyWeatherReport = HourlyWeatherReport(
+        time: "12:00",
+        temperature: 12.5,
+        humidity: "%60",
+        windSpeed: "12 km/h",
+        weatherSymbolName: "clear",
+        weatherInfo: "Clear"
+    )
 }

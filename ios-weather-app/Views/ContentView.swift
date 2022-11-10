@@ -32,44 +32,56 @@ struct ContentView: View {
                     .background(Color.backgroundColor)
             } else {
                 VStack {
-                    HStack {
-                        Spacer()
+                    if (deviceLocationService.isLocationAccessGranted) {
                         
-                        SettingsButton(showSettingsSheet: $showSettingsSheet)
-                            .padding(.trailing, 10)
-                            .sheet(
-                                isPresented: $showSettingsSheet,
-                                onDismiss: {
-                                    temperatureUnit = temperatureUnitState
+                        HStack {
+                            Spacer()
+                            
+                            SettingsButton(showSettingsSheet: $showSettingsSheet)
+                                .padding(.trailing, 10)
+                                .sheet(
+                                    isPresented: $showSettingsSheet,
+                                    onDismiss: {
+                                        temperatureUnit = temperatureUnitState
+                                    }
+                                ) {
+                                    ZStack {
+                                        Color.backgroundColor
+                                        
+                                        SettingsSheetView(
+                                            temperatureUnitState: $temperatureUnitState,
+                                            onDismissRequest: {
+                                                showSettingsSheet.toggle()
+                                            }
+                                        )
+                                        
+                                    }
+                                    .background(Color.backgroundColor)
+                                    .presentationDetents([.medium])
                                 }
-                            ) {
-                                ZStack {
-                                    Color.backgroundColor
-                                    
-                                    SettingsSheetView(
-                                        temperatureUnitState: $temperatureUnitState,
-                                        onDismissRequest: {
-                                            showSettingsSheet.toggle()
-                                        }
-                                    )
-                                    
-                                }
-                                .background(Color.backgroundColor)
-                                .presentationDetents([.medium])
-                            }
+                        }
+                        
+                        WeatherReportView(
+                            isDarkModeEnabled: $isDarkModeEnabled,
+                            cityName: cityName,
+                            time: time,
+                            onRefresh: refresh,
+                            dailyReports: viewModel.dailyReport,
+                            temperatureUnit: temperatureUnit
+                        )
+                    } else {
+                        Image(systemName: "location.circle")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 60))
+                        
+                        Text("Allow location access to view weather information.")
+                            .padding()
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.gray)
+                            .font(.system(size: 20))
+                        
                     }
-                    
-                    WeatherReportView(
-                        isDarkModeEnabled: $isDarkModeEnabled,
-                        isLocationAccessProvided: deviceLocationService.isLocationAccessGranted,
-                        cityName: cityName,
-                        time: time,
-                        onRefresh: refresh,
-                        dailyReports: viewModel.dailyReport,
-                        temperatureUnit: temperatureUnit
-                    )
                 }
-                
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)

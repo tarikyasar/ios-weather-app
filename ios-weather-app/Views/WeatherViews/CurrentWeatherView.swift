@@ -11,6 +11,7 @@ import ios_neumorphism
 struct CurrentWeatherView: View {
     @Binding var isDarkModeEnabled: Bool
     var dailyReport: HourlyWeatherReport
+    var weatherReport: WeatherReport
     var targetTemperatureUnit: TemperatureUnit
     var onRefresh: () -> Void
     var width: CGFloat = 100
@@ -46,7 +47,7 @@ struct CurrentWeatherView: View {
             
             ZStack {
                 RoundedRectangle(cornerRadius: 40)
-                    .fill(Color.backgroundColor)
+                    .fill(Color("BackgroundColor"))
                     .frame(width: 270, height: 270)
                 
                 VStack {
@@ -78,6 +79,9 @@ struct CurrentWeatherView: View {
                         .foregroundColor(.gray)
                         .font(.system(size: 30))
                         .fontWeight(.medium)
+                    
+                    Text("H: \(Bundle.main.getTemperatureWithUnit(temperature: weatherReport.getHeighestTemperature(), unit: targetTemperatureUnit)) L: \(Bundle.main.getTemperatureWithUnit(temperature: weatherReport.getLowestTemperature(), unit: targetTemperatureUnit))")
+                        .foregroundColor(.gray)
                     
                     Spacer()
                     
@@ -138,14 +142,8 @@ struct CurrentWeatherView_Preview_Container: View {
     var body: some View {
         CurrentWeatherView(
             isDarkModeEnabled: $isDarkModeEnabled,
-            dailyReport: HourlyWeatherReport(
-                time: "00:00",
-                temperature: 12.0,
-                humidity: "%43",
-                windSpeed: "12 km/h",
-                weatherSymbolName: "cloud.rain.fill",
-                weatherInfo: "Rainy"
-            ),
+            dailyReport: HourlyWeatherReport.sampleHourlyWeatherReport,
+            weatherReport: WeatherReport.sampleWeatherReport,
             targetTemperatureUnit: TemperatureUnit.fahrenheit,
             onRefresh: {
                 print("Refreshed.")

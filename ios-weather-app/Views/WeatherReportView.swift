@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ios_neumorphism
 
 struct WeatherReportView: View {
     @State var refreshViewBackgroundColor = Color.gray
@@ -16,6 +17,7 @@ struct WeatherReportView: View {
     var onRefresh: () -> Void
     var dailyReports: [HourlyWeatherReport]
     var temperatureUnit: TemperatureUnit
+    var weatherReport: WeatherReport
     
     var body: some View {
         VStack {
@@ -36,6 +38,7 @@ struct WeatherReportView: View {
         CurrentWeatherView(
             isDarkModeEnabled: $isDarkModeEnabled,
             dailyReport: dailyReports[0],
+            weatherReport: weatherReport,
             targetTemperatureUnit: temperatureUnit,
             onRefresh: {
                 onRefresh()
@@ -43,19 +46,27 @@ struct WeatherReportView: View {
         )
         .padding(.bottom, 40)
         
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 25) {
-                ForEach(dailyReports, id: \.self) { dailyReport in
-                    HourlyWeatherReportView(
-                        isDarkModeEnabled: $isDarkModeEnabled,
-                        dailyReport: dailyReport,
-                        targetTemperatureUnit: temperatureUnit
-                    )
+        ZStack {
+            NeumorphicPressedSurface(
+                surfaceShape: RoundedRectangle(cornerRadius: 16),
+                isDarkModeEnabled: isDarkModeEnabled,
+                width: .infinity,
+                height: 120
+            )
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 25) {
+                    ForEach(dailyReports, id: \.self) { dailyReport in
+                        HourlyWeatherReportView(
+                            dailyReport: dailyReport,
+                            targetTemperatureUnit: temperatureUnit
+                        )
+                    }
                 }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 50)
             }
-            .padding(.horizontal, 10)
-            .padding(.vertical, 50)
-        }
+        }.padding(.horizontal, 20)
         
         Spacer()
     }

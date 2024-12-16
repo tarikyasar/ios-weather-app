@@ -15,6 +15,14 @@ struct WeatherReport: Hashable, Codable {
     let hourly_units: HourlyUnits
     let hourly: HourlyReport
     
+    func getHeighestTemperature() -> Int {
+        Int(hourly.temperature_2m.max()?.rounded() ?? 0.0)
+    }
+    
+    func getLowestTemperature() -> Int {
+        Int(hourly.temperature_2m.min()?.rounded() ?? 0.0)
+    }
+    
     static var sampleWeatherReport = WeatherReport(
         latitude: 39.0,
         longitude: 39.0,

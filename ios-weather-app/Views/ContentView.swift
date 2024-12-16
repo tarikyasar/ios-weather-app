@@ -12,16 +12,17 @@ import ios_neumorphism
 
 struct ContentView: View {
     @AppStorage("tempUnit") var temperatureUnit: TemperatureUnit = TemperatureUnit.celsius
+    @AppStorage("theme") var theme: Theme = Theme.light
     
     @StateObject var viewModel = ViewModel()
     @StateObject var deviceLocationService = DeviceLocationService.shared
     
     @State var tokens: Set<AnyCancellable> = []
-    @State var isDarkModeEnabled = false
     @State var cityName: String = "-"
     @State var time: String = ""
     @State var showSettingsSheet: Bool = false
     @State var temperatureUnitState: TemperatureUnit = TemperatureUnit.celsius
+    @State var themeState: Theme = Theme.light
     
     var dateFormatter = ISO8601DateFormatter.init()
     
@@ -33,7 +34,6 @@ struct ContentView: View {
             } else {
                 VStack {
                     if (deviceLocationService.isLocationAccessGranted) {
-                        
                         HStack {
                             Spacer()
                             
@@ -50,6 +50,7 @@ struct ContentView: View {
                                         
                                         SettingsSheetView(
                                             temperatureUnitState: $temperatureUnitState,
+                                            themeState: $theme,
                                             onDismissRequest: {
                                                 showSettingsSheet.toggle()
                                             }
@@ -62,12 +63,13 @@ struct ContentView: View {
                         }
                         
                         WeatherReportView(
-                            isDarkModeEnabled: $isDarkModeEnabled,
+                            isDarkModeEnabled: .constant(themeState == Theme.dark),
                             cityName: cityName,
                             time: time,
                             onRefresh: refresh,
                             dailyReports: viewModel.dailyReport,
-                            temperatureUnit: temperatureUnit
+                            temperatureUnit: temperatureUnit,
+                            weatherReport:viewModel.weatherReport
                         )
                     } else {
                         Image(systemName: "location.circle")
@@ -79,15 +81,15 @@ struct ContentView: View {
                             .multilineTextAlignment(.center)
                             .foregroundColor(.gray)
                             .font(.system(size: 20))
-                        
                     }
                 }
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        .background(Color.backgroundColor)
+        .background(Color("BackgroundColor"))
         .onAppear {
             temperatureUnitState = temperatureUnit
+            themeState = theme
             
             time = getTime()
             observeCoordinateUpdates()
@@ -95,6 +97,7 @@ struct ContentView: View {
             observeCityName()
             deviceLocationService.requestLocationUpdates()
         }
+        .preferredColorScheme(theme == Theme.dark ? .dark : .light)
     }
     
     func refresh() {

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsSheetView: View {
     @Binding var temperatureUnitState: TemperatureUnit
+    @Binding var themeState: Theme
     var onDismissRequest: () -> Void
     
     var body: some View {
@@ -65,7 +66,37 @@ struct SettingsSheetView: View {
             }
             .padding(10)
             
-            Divider()
+//            Divider()
+//            
+//            HStack {
+//                Text("Theme")
+//                    .font(.system(size: 26))
+//                    .foregroundColor(.darkGray)
+//                    .fontWeight(.medium)
+//                
+//                Spacer()
+//                
+//                Menu {
+//                    Button {
+//                        themeState = Theme.dark
+//                    } label: {
+//                        Text(Theme.dark.rawValue)
+//                    }
+//                    
+//                    Button {
+//                        themeState = Theme.light
+//                    } label: {
+//                        Text(Theme.light.rawValue)
+//                    }
+//                } label: {
+//                    Text(themeState.rawValue)
+//                        .fontWeight(.medium)
+//                        .font(.system(size: 20))
+//                        .foregroundColor(.gray)
+//                        .frame(width: 100)
+//                }
+//            }
+//            .padding(10)
             
             Spacer()
         }

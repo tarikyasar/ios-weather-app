@@ -19,3 +19,6 @@
 "Allow location access to view weather information." = "Hava durumunu görüntülemek için konum servislerine erişim izni vermeniz gerekmektedir.";
 "Settings" = "Ayarlar";
 "Temperature Unit" = "Sıcaklık Birimi";
+"Theme" = "Tema";
+"Light" = "Açık";
+"Dark" = "Karanlık";

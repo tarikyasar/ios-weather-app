@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		710558B12CFB932B00F2CBA2 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710558B02CFB932B00F2CBA2 /* Theme.swift */; };
 		7122D9BF29095D520095B287 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7122D9C129095D520095B287 /* Localizable.strings */; };
 		7153E71C2909660A007CF33A /* WeatherReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7153E71B2909660A007CF33A /* WeatherReportView.swift */; };
 		7163A7A72902F01B00DE0FFA /* DeviceLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7163A7A62902F01B00DE0FFA /* DeviceLocationService.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		710558B02CFB932B00F2CBA2 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		7122D9C029095D520095B287 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7153E71B2909660A007CF33A /* WeatherReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherReportView.swift; sourceTree = "<group>"; };
 		7163A7A62902F01B00DE0FFA /* DeviceLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLocationService.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				717B95412901ADF8007C68A7 /* WeatherReport.swift */,
 				717B95462901BB27007C68A7 /* HourlyWeatherReport.swift */,
 				71D0EAA1290AFCB500205EE6 /* TemperatureUnit.swift */,
+				710558B02CFB932B00F2CBA2 /* Theme.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				717B95512901C12D007C68A7 /* HourlyWeatherReportView.swift in Sources */,
 				71D0EA9E290AF65A00205EE6 /* SettingsButton.swift in Sources */,
 				71D0EAA6290B0CAE00205EE6 /* SettingsSheetView.swift in Sources */,
+				710558B12CFB932B00F2CBA2 /* Theme.swift in Sources */,
 				71D0EAA2290AFCB500205EE6 /* TemperatureUnit.swift in Sources */,
 				717B954F2901C124007C68A7 /* CurrentWeatherView.swift in Sources */,
 				717B952F2901A889007C68A7 /* ContentView.swift in Sources */,

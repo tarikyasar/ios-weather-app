@@ -52,34 +52,3 @@ func getWeatherSymbolName(number: Int, hour: Int) -> (String, String) {
         return (dayLightRange.contains(hour) ? "sun.max.fill" : "moon.stars.fill", "Clear")
     }
 }
-
-
-/*
- func getWeatherSymbolName(number: Int) -> WeatherCode {
-     switch (number) {
-     case 0:
-         return .clear()
-     case 1...3:
-         return .partlyCloudy()
-     case 45...48:
-         return .foggy()
-     case 51...55:
-         return .drizzle()
-     case 61...67:
-         return .rain()
-     case 71...75:
-         return .snowFall()
-     case 77:
-         return .snowGrains()
-     case 80...82:
-         return .rainShowers()
-     case 85...86:
-         return .snowShowers()
-     case 95...99:
-         return .thunderStorm()
-     default:
-         return .clear()
-     }
- }
- */
-

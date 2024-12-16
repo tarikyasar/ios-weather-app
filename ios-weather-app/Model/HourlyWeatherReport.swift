@@ -10,7 +10,7 @@ import SwiftUI
 
 struct HourlyWeatherReport: Hashable {
     let time: String
-    let temperature: Double
+    let temperature: Int
     let humidity: String
     let windSpeed: String
     let weatherSymbolName: String
@@ -18,7 +18,7 @@ struct HourlyWeatherReport: Hashable {
     
     static var sampleHourlyWeatherReport = HourlyWeatherReport(
         time: "12:00",
-        temperature: 12.5,
+        temperature: 12,
         humidity: "%60",
         windSpeed: "12 km/h",
         weatherSymbolName: "clear",

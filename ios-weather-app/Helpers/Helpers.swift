@@ -37,12 +37,12 @@ extension Bundle {
         .resume()
     }
     
-    func getTemperatureWithUnit(temperature: Double, unit: TemperatureUnit) -> String {
+    func getTemperatureWithUnit(temperature: Int, unit: TemperatureUnit) -> String {
         switch(unit){
         case .celsius:
             return "\(temperature)°C"
         case .fahrenheit:
-            return "\(String(format: "%.1f", temperature*1.8 + 32))°F"
+            return "\(String(format: "%.1f", Double(temperature)*1.8 + 32))°F"
         }
     }
 }
